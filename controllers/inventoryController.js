@@ -113,12 +113,23 @@ exports.creaArticolo = async (req, res) => {
   }
 };
 
-// ELIMINAZIONE CATEGORIA
+// ELIMINAZIONE CATEGORIA (CON PASSWORD NASCOSTA)
 exports.eliminaCategoria = async (req, res) => {
   try {
+    const { adminPassword } = req.body;
     const categoriaId = req.params.id;
     
-    // Prima controlla se ci sono articoli in questa categoria
+    // Controllo password NASCOSTA
+    if (adminPassword !== process.env.ADMIN_PASSWORD) {
+      const [categorie] = await db.promise().query('SELECT * FROM categorie');
+      return res.render('categorie/lista', {
+        title: 'Tutte le Categorie',
+        categorie: categorie,
+        error: 'Password admin errata!'
+      });
+    }
+    
+    // Controlla se ci sono articoli in questa categoria
     const [articoli] = await db.promise().query(
       'SELECT * FROM articoli WHERE categoria_id = ?', 
       [categoriaId]
@@ -161,8 +172,6 @@ exports.listaArticoli = async (req, res) => {
   }
 };
 
-// AGGIUNGI QUESTE FUNZIONI DOPO LE ESISTENTI:
-
 // === ARTICOLI - UPDATE ===
 exports.modificaArticolo = async (req, res) => {
   try {
@@ -202,10 +211,27 @@ exports.aggiornaArticolo = async (req, res) => {
   }
 };
 
-// === ARTICOLI - DELETE ===
+// === ARTICOLI - DELETE (CON PASSWORD NASCOSTA) ===
 exports.eliminaArticolo = async (req, res) => {
   try {
+    const { adminPassword } = req.body;
     const articoloId = req.params.id;
+    
+    // Controllo password NASCOSTA
+    if (adminPassword !== process.env.ADMIN_PASSWORD) {
+      const [articoli] = await db.promise().query(`
+        SELECT a.*, c.nome as categoria_nome 
+        FROM articoli a 
+        LEFT JOIN categorie c ON a.categoria_id = c.id 
+        ORDER BY a.nome
+      `);
+      return res.render('articoli/lista', {
+        title: 'Tutti gli Articoli',
+        articoli: articoli,
+        error: 'Password admin errata!'
+      });
+    }
+    
     await db.promise().query('DELETE FROM articoli WHERE id = ?', [articoloId]);
     res.redirect('/articoli');
   } catch (error) {
