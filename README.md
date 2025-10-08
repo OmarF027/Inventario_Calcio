@@ -1,0 +1,1 @@
+Un'applicazione web moderna e responsive – sviluppata nell’ambito del corso di [The Odin Project](https://www.theodinproject.com/) – per la gestione dell'inventario di una squadra di calcio. Sistema completo CRUD con interfaccia utente avanzata e sicurezza integrata.
