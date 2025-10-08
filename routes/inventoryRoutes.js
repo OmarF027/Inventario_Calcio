@@ -1,29 +1,11 @@
 const express = require('express');
 const router = express.Router();
+const inventoryController = require('../controllers/inventoryController');
 
-// ROTTA TEMPORANEA - la cambieremo dopo
-router.get('/', (req, res) => {
-  res.send(`
-    <html>
-      <body>
-        <h1>⚽ Inventario Calcio FUNZIONA!</h1>
-        <p>Il server è attivo! 🎉</p>
-        <a href="/categorie">Vai alle Categorie</a>
-      </body>
-    </html>
-  `);
-});
+// Home page - ora usa il controller
+router.get('/', inventoryController.home);
 
-router.get('/categorie', (req, res) => {
-  res.send(`
-    <html>
-      <body>
-        <h1>📋 Categorie</h1>
-        <p>Qui vedrai la lista delle categorie</p>
-        <a href="/">Torna alla Home</a>
-      </body>
-    </html>
-  `);
-});
+// Categorie - ora usa il controller  
+router.get('/categorie', inventoryController.listaCategorie);
 
 module.exports = router;

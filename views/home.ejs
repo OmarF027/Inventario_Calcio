@@ -1,0 +1,31 @@
+<%- include('partials/header', {title: 'Home - Inventario Calcio'}) %>
+
+<h2>Benvenuto nell'Inventario!</h2>
+
+<% if (categorie && categorie.length > 0) { %>
+    <h3>Categorie:</h3>
+    <ul>
+        <% categorie.forEach(categoria => { %>
+            <li><strong><%= categoria.nome %></strong> - <%= categoria.descrizione %></li>
+        <% }); %>
+    </ul>
+<% } else { %>
+    <p>Nessuna categoria trovata.</p>
+<% } %>
+
+<% if (articoli && articoli.length > 0) { %>
+    <h3>Articoli:</h3>
+    <ul>
+        <% articoli.forEach(articolo => { %>
+            <li><strong><%= articolo.nome %></strong> - Quantità: <%= articolo.quantita %></li>
+        <% }); %>
+    </ul>
+<% } else { %>
+    <p>Nessun articolo trovato.</p>
+<% } %>
+
+<a href="/categorie" style="display: inline-block; margin-top: 20px; padding: 10px 15px; background: #0055a4; color: white; text-decoration: none; border-radius: 3px;">
+    Vedi Tutte le Categorie →
+</a>
+
+<%- include('partials/footer') %>
