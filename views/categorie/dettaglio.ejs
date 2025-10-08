@@ -1,0 +1,45 @@
+<%- include('../partials/header', {title: 'Dettaglio Categoria'}) %>
+
+<h2>📄 Dettaglio Categoria</h2>
+
+<div style="background: #f8f9fa; padding: 20px; border-radius: 5px; max-width: 600px;">
+  <h3><%= categoria.nome %></h3>
+  
+  <div style="margin: 15px 0;">
+    <strong>ID:</strong> <%= categoria.id %>
+  </div>
+  
+  <div style="margin: 15px 0;">
+    <strong>Descrizione:</strong> 
+    <p><%= categoria.descrizione || 'Nessuna descrizione' %></p>
+  </div>
+  
+  <div style="margin: 15px 0;">
+    <strong>Data creazione:</strong> <%= categoria.created_at.toLocaleDateString('it-IT') %>
+  </div>
+</div>
+
+<% if (articoli && articoli.length > 0) { %>
+  <h3 style="margin-top: 30px;">Articoli in questa categoria (<%= articoli.length %>):</h3>
+  <ul>
+    <% articoli.forEach(articolo => { %>
+      <li>
+        <strong><%= articolo.nome %></strong> - Quantità: <%= articolo.quantita %>
+        <a href="/articoli/<%= articolo.id %>" style="margin-left: 10px; font-size: 12px; color: #0055a4;">Vedi dettaglio</a>
+      </li>
+    <% }); %>
+  </ul>
+<% } else { %>
+  <p style="margin-top: 20px;">Nessun articolo in questa categoria.</p>
+<% } %>
+
+<div style="margin-top: 20px;">
+  <a href="/categorie/<%= categoria.id %>/modifica" style="display: inline-block; padding: 10px 15px; background: #ffc107; color: black; text-decoration: none; border-radius: 3px; margin-right: 10px;">
+    ✏️ Modifica
+  </a>
+  <a href="/categorie" style="display: inline-block; padding: 10px 15px; background: #6c757d; color: white; text-decoration: none; border-radius: 3px;">
+    ← Torna alla Lista
+  </a>
+</div>
+
+<%- include('../partials/footer') %>

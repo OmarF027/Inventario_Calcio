@@ -1,0 +1,28 @@
+<%- include('../partials/header', {title: 'Modifica Categoria'}) %>
+
+<h2>✏️ Modifica Categoria</h2>
+
+<form action="/categorie/<%= categoria.id %>/aggiorna" method="POST" style="max-width: 500px;">
+  <div style="margin-bottom: 20px;">
+    <label for="nome" style="display: block; margin-bottom: 5px; font-weight: bold;">Nome Categoria:*</label>
+    <input type="text" id="nome" name="nome" value="<%= categoria.nome %>" required 
+           style="padding: 10px; width: 100%; border: 1px solid #ddd; border-radius: 4px;">
+  </div>
+  
+  <div style="margin-bottom: 20px;">
+    <label for="descrizione" style="display: block; margin-bottom: 5px; font-weight: bold;">Descrizione:</label>
+    <textarea id="descrizione" name="descrizione" 
+              style="padding: 10px; width: 100%; height: 100px; border: 1px solid #ddd; border-radius: 4px;"><%= categoria.descrizione %></textarea>
+  </div>
+  
+  <div>
+    <button type="submit" style="padding: 12px 25px; background: #ffc107; color: black; border: none; border-radius: 4px; cursor: pointer; font-size: 16px;">
+      💾 Salva Modifiche
+    </button>
+    <a href="/categorie" style="margin-left: 15px; padding: 12px 25px; background: #666; color: white; text-decoration: none; border-radius: 4px; display: inline-block;">
+      ❌ Annulla
+    </a>
+  </div>
+</form>
+
+<%- include('../partials/footer') %>

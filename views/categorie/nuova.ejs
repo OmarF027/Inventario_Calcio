@@ -1,0 +1,36 @@
+<%- include('../partials/header', {title: 'Nuova Categoria'}) %>
+
+<h2>➕ Nuova Categoria</h2>
+
+<% if (locals.error) { %>
+  <div style="background: #ffebee; color: #c62828; padding: 10px; margin: 10px 0; border-radius: 5px;">
+    ❌ <strong>Errore:</strong> <%= error %>
+  </div>
+<% } %>
+
+<form action="/categorie/crea" method="POST" style="max-width: 500px;">
+  <div style="margin-bottom: 20px;">
+    <label for="nome" style="display: block; margin-bottom: 5px; font-weight: bold;">Nome Categoria:*</label>
+    <input type="text" id="nome" name="nome" required 
+           style="padding: 10px; width: 100%; border: 1px solid #ddd; border-radius: 4px;"
+           placeholder="Es: Equipaggiamento, Materiale Allenamento...">
+  </div>
+  
+  <div style="margin-bottom: 20px;">
+    <label for="descrizione" style="display: block; margin-bottom: 5px; font-weight: bold;">Descrizione:</label>
+    <textarea id="descrizione" name="descrizione" 
+              style="padding: 10px; width: 100%; height: 100px; border: 1px solid #ddd; border-radius: 4px;"
+              placeholder="Descrizione opzionale della categoria..."></textarea>
+  </div>
+  
+  <div>
+    <button type="submit" style="padding: 12px 25px; background: #0055a4; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 16px;">
+      ✅ Crea Categoria
+    </button>
+    <a href="/categorie" style="margin-left: 15px; padding: 12px 25px; background: #666; color: white; text-decoration: none; border-radius: 4px; display: inline-block;">
+      ❌ Annulla
+    </a>
+  </div>
+</form>
+
+<%- include('../partials/footer') %>
